@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getPokemonData, getPokemons } from "./Datafetch";
 import Pokedex from "./Pokedex";
-import Header from "./Header";
 import "../Homepage.css";
 
 function Home() {
@@ -33,22 +32,22 @@ function Home() {
 
   return (
     <div>
-      <Header />
-      
-      {notFound ? (
-        <div className="not-found-text">
-          <h1>Sorry, Pokemon not found! </h1>
-          <img alt="loading..." />
-        </div>
-      ) : (
-        <Pokedex
-          pokemons={pokemons}
-          page={page}
-          setPage={setPage}
-          total={total}
-          loading={loading}
-        />
-      )}
+      <div className="pokedex">
+        {notFound ? (
+          <div className="not-found-text">
+            <h1>Sorry, Pokemon not found! </h1>
+            <img alt="loading..." />
+          </div>
+        ) : (
+          <Pokedex
+            pokemons={pokemons}
+            page={page}
+            setPage={setPage}
+            total={total}
+            loading={loading}
+          />
+        )}
+      </div>
     </div>
   );
 }

@@ -2,16 +2,13 @@ div {
     text-align: center;
     font-size: 1.25rem;
     padding: 20px;
-    display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    @media (max-width: 768px) {
-        display: block;
-    }
-    @media (max-width: 1200px) and (min-width: 769px) {
-        display: flex;
-    }
+}
+
+.pokedex {
+    display: block;
 }
 
 img {

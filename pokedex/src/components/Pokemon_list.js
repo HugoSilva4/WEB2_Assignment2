@@ -1,12 +1,18 @@
 import React from "react";
+import {useNavigate} from "react-router-dom"
 
 
 const Pokemon = (props) => {
     const pokemon = props.pokemon;
-    //const index = props.index;
+
+    let navigate = useNavigate(); 
+    const routeChange = () =>{ 
+        let path = `/detail/${pokemon.id}`; 
+        navigate(path);
+    }
 
     return (
-    <div className="pokemon-card">
+    <button className="pokemon-card" onClick={routeChange}>
         <div className="pokemon-image-container">
             <img alt={pokemon.name} src={pokemon.sprites.front_default} className="pokemon-image"/>
         </div>
@@ -26,7 +32,7 @@ const Pokemon = (props) => {
                 
             </div>
         </div>
-    </div>)
+    </button>)
 }
 
 export default Pokemon;

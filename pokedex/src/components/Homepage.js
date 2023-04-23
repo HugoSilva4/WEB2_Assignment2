@@ -28,6 +28,7 @@ function Home() {
   };
 
   useEffect(() => {
+    fetchPokemons();
     /*if (!searching) {
       fetchPokemons();
     }*/

@@ -29,13 +29,9 @@ function Home() {
 
   useEffect(() => {
     fetchPokemons();
-    /*if (!searching) {
-      fetchPokemons();
-    }*/
   }, [page]);
 
   return (
-    //<SearchBar onSearch={onSearch} />
     <div>
       <Header />
       
@@ -56,27 +52,5 @@ function Home() {
     </div>
   );
 }
-
-/*const Div = styled.div`
-  text-align: center;
-  font-size: 1.25rem;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  @media (max-width: 768px) {
-    display: block;
-  }
-  @media (max-width: 1200px) and (min-width: 769px) {
-    display: flex;
-  }
-`;*/
-
-/*const Img = styled.img`
-  @media (max-width: 768px) {
-    width: 80%;
-  }
-`;*/
 
 export default Home;

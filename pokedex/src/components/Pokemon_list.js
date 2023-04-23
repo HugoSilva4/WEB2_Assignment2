@@ -2,9 +2,9 @@ import React from "react";
 
 
 const Pokemon = (props) => {
-    const {pokemon} = props;
-   
-   
+    const pokemon = props.pokemon;
+    //const index = props.index;
+
     return (
     <div className="pokemon-card">
         <div className="pokemon-image-container">

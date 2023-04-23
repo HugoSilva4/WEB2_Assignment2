@@ -1,20 +1,61 @@
+import React, { useEffect, useState } from "react";
+import { getPokemonData, getPokemons } from "./components/Datafetch";
+import About from "./components/About";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import Home from './components/Homepage';
+import Pokedex from "./components/Pokedex";
+import PokemonDetail from './components/pokemon_details';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 
 function App() {
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [notFound, setNotFound] = useState(false);
+  const [pokemons, setPokemons] = useState([]);
+
+
+  const itensPerPage = 20;
+
+  useEffect(() => {
+    const fetchPokemons = async () => {
+      try {
+        loading(true);
+        notFound(false);
+        const data = await pokemons(itensPerPage, itensPerPage * page);
+        const promises = data.results.map(async (pokemon) => {
+          return await getPokemonData(pokemon.url);
+        });
+        const results = await Promise.all(promises);
+        setPokemons(results);
+        setLoading(false);
+        setTotalPages(Math.ceil(data.count / itensPerPage));
+      } catch (error) {
+        console.log("fetchPokemons error: ", error);
+      }
+    };
+  }, [page]);
+
+
   return (
     <div className="App">
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path='*' element={ <Home /> } />
-          <Route path={'/about'} element={<About />}/>
-        </Routes>
-      </BrowserRouter>
+    <Router>
+        <Route path ="about" exact>
+        </Route>
+        <Route path="/" exact>
+          <Home/>
+        </Route>
+        <Route path="/home">
+          <Home/>
+        </Route>
+        <Route path="/detail/:id">
+          <PokemonDetail />
+        </Route>
+      </Router>
     </div>
+  
   );
 }
 

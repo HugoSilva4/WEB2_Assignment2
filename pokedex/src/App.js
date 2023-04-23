@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { getPokemonData, getPokemons } from "./components/Datafetch";
 import About from "./components/About";
 import "./App.css";
-import Navbar from "./components/Navbar";
 import Home from './components/Homepage';
 import Pokedex from "./components/Pokedex";
 import PokemonDetail from './components/pokemon_details';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
 function App() {
@@ -41,21 +40,14 @@ function App() {
 
   return (
     <div className="App">
-    <Router>
-        <Route path ="about" exact>
-        </Route>
-        <Route path="/" exact>
-          <Home/>
-        </Route>
-        <Route path="/home">
-          <Home/>
-        </Route>
-        <Route path="/detail/:id">
-          <PokemonDetail />
-        </Route>
-      </Router>
+    <BrowserRouter>
+      <Routes>
+        <Route path ="about" element={<About />} exact />
+        <Route path="/detail/:id" element={<PokemonDetail/>}/>
+        <Route path="*" element={<Home />} exact />
+      </Routes>
+    </BrowserRouter>
     </div>
-  
   );
 }
 

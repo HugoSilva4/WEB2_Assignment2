@@ -1,5 +1,5 @@
 import React from "react";
-import Pagination from "./Pagination";
+import Pagination from "./Pagination.js";
 import Pokemon from "./Pokemon_list";
 
 const Pokedex = (props) => {

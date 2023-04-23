@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import pokemon_details from "./components/pokemon_details";
+import {searchPokemon} from "./Datafetch";
+import Header from "./Header";
+//import pokemon_details from "./components/pokemon_details";
 
 
 function PokemonDetail() {
@@ -8,12 +10,10 @@ function PokemonDetail() {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
-  const searchPokemon = async (id) => {
+  const search = async (id) => {
     try {
       setLoading(false);
-      let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-      const response = await fetch(url);
-      const data = await response.json();
+      const data = await searchPokemon(id);
 
       console.log(data);
       setPokemons(data);
@@ -22,7 +22,7 @@ function PokemonDetail() {
   };
 
   useEffect(() => {
-    searchPokemon(id);
+    search(id);
   }, []);
 
   {

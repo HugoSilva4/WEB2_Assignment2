@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { getPokemonData, getPokemon } from "./Pokedex";
-import Pokedex from "./components/Pokedex";
+import { getPokemonData, getPokemons } from "./Datafetch";
+import Pokedex from "./Pokedex";
+import Header from "./Header";
+import "../Homepage.css";
 
 function Home() {
   const [pokemons, setPokemons] = useState([]);
@@ -12,7 +14,7 @@ function Home() {
   const fetchPokemons = async () => {
     try {
       setLoading(true);
-      const data = await getPokemon(20, 20 * page);
+      const data = await getPokemons(20, 20 * page);
 
       const promises = data.results.map(async (pokemon) => {
         return await getPokemonData(pokemon.url);
@@ -26,20 +28,21 @@ function Home() {
   };
 
   useEffect(() => {
-    if (!searching) {
+    /*if (!searching) {
       fetchPokemons();
-    }
+    }*/
   }, [page]);
 
   return (
+    //<SearchBar onSearch={onSearch} />
     <div>
       <Header />
-      <SearchBar onSearch={onSearch} />
+      
       {notFound ? (
-        <Div className="not-found-text">
+        <div className="not-found-text">
           <h1>Sorry, Pokemon not found! </h1>
-          <Img src={logo} alt="loading..." />
-        </Div>
+          <img alt="loading..." />
+        </div>
       ) : (
         <Pokedex
           pokemons={pokemons}
@@ -53,7 +56,7 @@ function Home() {
   );
 }
 
-const Div = styled.div`
+/*const Div = styled.div`
   text-align: center;
   font-size: 1.25rem;
   padding: 20px;
@@ -67,12 +70,12 @@ const Div = styled.div`
   @media (max-width: 1200px) and (min-width: 769px) {
     display: flex;
   }
-`;
+`;*/
 
-const Img = styled.img`
+/*const Img = styled.img`
   @media (max-width: 768px) {
     width: 80%;
   }
-`;
+`;*/
 
 export default Home;
